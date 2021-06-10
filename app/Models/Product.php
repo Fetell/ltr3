@@ -48,4 +48,12 @@ class Product extends Model implements StatusInterface
     {
         return $this->active()->latest()->get();
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }
