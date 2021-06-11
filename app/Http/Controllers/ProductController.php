@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Services\ProductService;
 use Illuminate\Routing\Controller as BaseController;
-
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 class ProductController extends BaseController
@@ -28,6 +28,10 @@ class ProductController extends BaseController
      */
     public function active()
     {
-        return $this->productService->handleActive();
+        try {
+            return $this->productService->handleActive();
+        } catch (\Exception $e){
+            throw new NotFoundHttpException('pisun');
+        }
     }
 }
