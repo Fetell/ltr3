@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCartTable extends Migration
 {
+    private $table = 'cart';
     /**
      * Run the migrations.
      *
@@ -13,10 +14,13 @@ class CreateCartTable extends Migration
      */
     public function up()
     {
-        Schema::create('cart', function (Blueprint $table) {
+        if (Schema::hasTable($this->table)) {
+            Schema::dropIfExists($this->table);
+        }
+        Schema::create($this->table, function (Blueprint $table) {
             $table->id();
-            $table->Integer('user_id');
-            $table->Integer('product_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('product_id');
             $table->tinyInteger('amount');
             $table->timestamps();
 
@@ -41,6 +45,6 @@ class CreateCartTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cart');
+        Schema::dropIfExists($this->table);
     }
 }
