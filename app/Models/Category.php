@@ -30,19 +30,16 @@ class Category extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-
     public function subcategories()
     {
         return $this->hasMany(Subcategory::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
-    public function products()
-    {
-        return $this->hasMany(Product::class);
-
+    public function products(){
+        return $this->hasManyThrough(Product::class, Subcategory::class, 'subcat_id', 'cat_id');
     }
 
     //@TODO add statuses like active/inactive

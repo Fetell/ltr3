@@ -54,7 +54,6 @@ class Product extends Model implements StatusInterface
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-
     public function carts()
     {
         return $this->hasMany(Cart::class);
@@ -63,7 +62,6 @@ class Product extends Model implements StatusInterface
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-
     public function subcategories()
     {
         return $this->belongsTo(Subcategory::class);
