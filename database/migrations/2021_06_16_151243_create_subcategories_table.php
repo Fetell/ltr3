@@ -4,9 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCartTable extends Migration
+class CreateSubcategoriesTable extends Migration
 {
-    private $table = 'cart';
+    private $table = 'subcategories';
     /**
      * Run the migrations.
      *
@@ -14,27 +14,22 @@ class CreateCartTable extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable($this->table)) {
+        if (Schema::hasTable($this->table))
+        {
             Schema::dropIfExists($this->table);
         }
         Schema::create($this->table, function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('product_id');
-            $table->tinyInteger('amount');
+            $table->string('name');
+            $table->unsignedBigInteger('cat_id');
+            $table->boolean('active')->default(false);
             $table->timestamps();
 
-            $table->foreign('user_id')
+            $table->foreign('cat_id')
                 ->references('id')
-                ->on('users')
+                ->on('categories')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreign('product_id')
-                ->references('id')
-                ->on('products')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
         });
     }
 
