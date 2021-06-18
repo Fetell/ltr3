@@ -35,4 +35,15 @@ class Category extends Model
     {
         return $this->hasMany(Subcategory::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+
+    }
+
+    //@TODO add statuses like active/inactive
 }
