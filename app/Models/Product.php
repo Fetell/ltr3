@@ -36,6 +36,7 @@ class Product extends Model implements StatusInterface
      * @param $query
      * @return mixed
      */
+
     public function scopeActive($query)
     {
         return $query->whereActive(self::STATUS_ACTIVE);
@@ -44,8 +45,25 @@ class Product extends Model implements StatusInterface
     /**
      * @return mixed
      */
+
     public function getActiveList()
     {
         return $this->active()->latest()->get();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function subcategories()
+    {
+        return $this->belongsTo(Subcategory::class);
     }
 }
